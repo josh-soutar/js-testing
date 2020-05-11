@@ -5,7 +5,6 @@ import { Link } from "gatsby"
 
 
 const StyledFooter = styled.footer`
-  background-color: grey;
   position: absolute;
   bottom: 0;
   width: 100%;
