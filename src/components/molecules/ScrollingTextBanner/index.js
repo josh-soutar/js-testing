@@ -2,15 +2,17 @@ import React, { useState } from "react"
 import styled, { css, keyframes } from "@xstyled/styled-components"
 
 const slideAnimation = keyframes`
+
   100% { transform: translateX(-50%); }
 `
 
 const slideCSS = css`
-  animation: 10s ${slideAnimation} linear infinite;
+  animation: 20s ${slideAnimation} linear infinite;
 `
 
 const pauseAnimation = css`
 animation-play-state: paused !important;
+opacity: 1;
 `
 
 const innerContainerStyle = css`
@@ -26,6 +28,7 @@ const ParentContainer = styled.div`
   font-size: 30px;
   align-items: center;
   height: 80px;
+  text-transform: lowercase;
 `
 
 const StyledLabel = styled.div`
@@ -48,6 +51,8 @@ const ScrollingWords = styled.div`
   height: 100%;
   align-items: center;
   transform: translate3d(0,0,0);
+  opacity: 0.5;
+  transition: opacity 0.4s;
 `
 
 const ScrollingWord = styled.div`
@@ -91,7 +96,7 @@ function ScrollingTextBanner({ label, scrollingWords }) {
       <ParentContainer className="top-container">
         <StyledLabel>{label}</StyledLabel>
         <ScrollingAreaContainer className="scrolling-words-container" onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
-          <ScrollingWords className="scrollingWords" css={hovering ? [pauseAnimation, slideCSS] : slideCSS}>
+          <ScrollingWords className="scrollingWords" css={hovering ? [slideCSS, pauseAnimation] : slideCSS}>
             {styledScrollingWords}
           </ScrollingWords>
         </ScrollingAreaContainer>
