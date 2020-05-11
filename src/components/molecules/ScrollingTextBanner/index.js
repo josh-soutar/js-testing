@@ -76,14 +76,6 @@ function ScrollingTextBanner({ label, scrollingWords }) {
     scrollingWordsRepeated.push(...scrollingWords)
   }
 
-  function mouseEnter() {
-    setHovering(true) 
-  }
-
-  function mouseLeave() {
-    setHovering(false) 
-  }
-
   //Wrap each word in a class so we can style it
   let styledScrollingWords = scrollingWordsRepeated.map((thisWord, index) => (
     <ScrollingWord className="scrolling-word" key={index}>
@@ -95,7 +87,7 @@ function ScrollingTextBanner({ label, scrollingWords }) {
     <>
       <ParentContainer className="top-container">
         <StyledLabel>{label}</StyledLabel>
-        <ScrollingAreaContainer className="scrolling-words-container" onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+        <ScrollingAreaContainer className="scrolling-words-container" onMouseEnter={() => { setHovering(true) }} onMouseLeave={() => { setHovering(false) }}>
           <ScrollingWords className="scrollingWords" css={hovering ? [slideCSS, pauseAnimation] : slideCSS}>
             {styledScrollingWords}
           </ScrollingWords>
