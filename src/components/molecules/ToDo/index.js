@@ -2,8 +2,7 @@ import React, { useState } from "react"
 import styled from "@xstyled/styled-components"
 
 import AddToDo from "../../atoms/AddToDo"
-
-const ToDoContainer = styled.div``
+import ToDoList from "../ToDoList"
 
 /*                                                                                                                                                                                               
                                                                                     tttt               hhhhhhh                                               kkkkkkkk                          
@@ -24,22 +23,28 @@ rr::::::rrrrr::::::re::::::e     e:::::e         a::::ac:::::::cccccc:::::cttttt
  rrrrrrr                eeeeeeeeeeeeee  aaaaaaaaaa  aaaa   cccccccccccccccc          ttttttttttt        hhhhhhh     hhhhhhh   ooooooooooo      ooooooooooo   kkkkkkkk    kkkkkkksssssssssss                                                                                                                                                                                            
 */
 
+const ToDoContainer = styled.div`
+width: 500px;
+margin: 0 auto;
+
+`
+
 function ToDo() {
-  const [todos, setTodos] = useState([
+  const [todos, setToDos] = useState([
     { text: "Learn react" },
     { text: "make dat mooooooonay" },
   ])
 
-  const addToDo = (e) => {
-    console.log('adding to do',e.target.value)
+  function pushToDo(thisToDo) {
+    setToDos([...todos, thisToDo])
   }
 
-  return (
-    <div>
-      <ToDoContainer>This is the to do {JSON.stringify(todos)}</ToDoContainer>
 
-      <AddToDo onClick={addToDo}/>
-    </div>
+  return (
+    <ToDoContainer>      
+      <AddToDo onClick={pushToDo}/>
+      <ToDoList todos={todos}></ToDoList>      
+    </ToDoContainer>
   )
 }
 
