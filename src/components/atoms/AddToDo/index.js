@@ -1,9 +1,33 @@
 import React, { useState } from "react"
-import styled from "@xstyled/styled-components"
+import styled, { css } from "@xstyled/styled-components"
 
 
 export default function AddToDo({ onClick }) {
   const [toDo, setToDoText] = useState({text: ""})
+
+  const sharedStyle = css`
+  padding: 1;
+  font-size: 3;
+  `
+
+  const StyledForm = styled.div`
+  display: flex;
+
+  `
+
+  const StyledTextInput = styled.input`
+  flex-grow: 1;
+  border: 1px solid black;
+  border-width: 1 1 1 1;
+  ${sharedStyle}
+  `
+
+  const StyledButtonInput = styled.input`
+  width: 75px;
+  border: 1px solid black;
+  border-width: 1 1 1 0;
+  ${sharedStyle}
+  `
 
 
   function handleSubmit(event) {
@@ -13,12 +37,9 @@ export default function AddToDo({ onClick }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Add to do<br></br>
-        <input type="text" placeholder="add to do" value={toDo.text} onChange={e => setToDoText({ 'text': e.target.value })} />
-      </label>
-      <input type="submit" value="Submit" disabled={toDo.text == ""} />      
-    </form>
+    <StyledForm  as="form" onSubmit={handleSubmit}>
+      <StyledTextInput type="text" placeholder="add to do" value={toDo.text} onChange={e => setToDoText({ 'text': e.target.value })} />
+      <StyledButtonInput type="submit" value="Submit" disabled={toDo.text === ""} />      
+    </StyledForm>
   )
 }

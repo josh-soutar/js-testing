@@ -9,7 +9,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: robotoslab, serif;
+  font-family: arial, serif;
 }
 
 h1,
@@ -44,3 +44,5 @@ iframe {
   display: block;
   max-width: 100%;
 }
+
+

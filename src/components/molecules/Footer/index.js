@@ -1,8 +1,5 @@
 import React from "react"
 import styled from "@xstyled/styled-components"
-import { Link } from "gatsby"
-
-
 
 const StyledFooter = styled.footer`
   position: absolute;

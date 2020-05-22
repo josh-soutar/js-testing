@@ -1,11 +1,13 @@
 import React from "react"
 import styled from "@xstyled/styled-components"
+import { ThemeProvider } from "@xstyled/styled-components"
 
 import Header from "../components/molecules/Header"
 import Footer from "../components/molecules/Footer"
 
-
 import "./global.css"
+
+import theme from "./utils/theme"
 
 const GlobalPageLayout = styled.div`
   position: relative;
@@ -18,15 +20,15 @@ const BodyWrapper = styled.div`
 
 const Layout = ({ children }) => {
   return (
-    <GlobalPageLayout className="GlobalPageLayout">
-      <Header />
-      
-      <BodyWrapper>      
-        {children}
-      </BodyWrapper>
+    <ThemeProvider theme={theme}>
+      <GlobalPageLayout className="GlobalPageLayout">
+        <Header />
 
-      <Footer />
-    </GlobalPageLayout>
+        <BodyWrapper>{children}</BodyWrapper>
+
+        <Footer />
+      </GlobalPageLayout>
+    </ThemeProvider>
   )
 }
 
