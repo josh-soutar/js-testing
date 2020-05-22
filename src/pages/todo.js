@@ -13,17 +13,35 @@ export default function ToDoPage() {
     padding: 0 1;
     `
 
-    let [todo, setToDo] = useState({})
+    let [todos, setToDos] = useState([
+        { id: getUniqueID(), text: "Learn react" },
+        { id: getUniqueID(), text: "make dat mooooooonay" },
+      ])
+
+    let [selectedToDo, setSelectedToDo] = useState({})
+
+    function addToDo(thisToDo) {
+        thisToDo.id = getUniqueID()
+        setToDos([...todos, thisToDo])
+      }
+    
+      function getUniqueID() {
+        return Math.ceil(Math.random() * 100000000)
+      }
+    
+      function removeToDo(thisToDo) {
+        setToDos(todos.filter(todo => todo.id !== thisToDo.id))
+      }
 
     function selectToDo(todo) {
-        setToDo(todo)
+        setSelectedToDo(todo)
     }
 
     return(    
     <Layout>
         <ToDoContainer>
-            <ToDo selectToDo={selectToDo}/>
-            <ToDoDetails selectedToDo={todo}/>            
+            <ToDo todos={todos} selectToDo={selectToDo} removeToDo={removeToDo} addToDo={addToDo}/>
+            <ToDoDetails selectedToDo={selectedToDo}/>            
         </ToDoContainer>
     </Layout>
     )

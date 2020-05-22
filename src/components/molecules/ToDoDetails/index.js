@@ -12,10 +12,15 @@ export default function ToDoDetails({ selectedToDo }) {
     padding: 1;
     `
 
+    const nothingSelected = selectedToDo == {} ? 'wtf' : 'idk'
+
 
     return (
         <ToDoDetailsContainer>
+
             received todo is: {JSON.stringify(selectedToDo)}
+            <br></br>
+            nothing selected: {nothingSelected}
         </ToDoDetailsContainer>
     )
 

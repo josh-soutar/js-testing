@@ -15,8 +15,14 @@ export default function ToDoList({ todos, removeToDo, selectToDo }) {
   align-items: center;
   justify-content: space-between;
   border: 1px solid black;
-  border-width: ${props => props.first ? "0px 1px 1px 1px" : "0px 1px 1px 1px"};
+  border-width: 0px 1px 1px 1px;
   padding: 20px 15px;
+  &:hover {
+    cursor: pointer;
+    background-color: backgroundHover;
+  }
+  z-index: 10;
+  
 `
 
 const LiText = styled.div`
@@ -25,6 +31,7 @@ const LiText = styled.div`
 const RemoveLiButton = styled.button`
 padding: 1;
 font-weight: 900;
+z-index: 20;
 &:hover {
   background-color: backgroundHover;
   cursor: pointer;
@@ -32,8 +39,8 @@ font-weight: 900;
 `
 
   let toDoItem = todos.map((thisToDo, index) => (    
-    <StyledLI key={thisToDo.id} first={index+1 === 1}>
-      <LiText onClick={() => selectToDo(thisToDo)}>{index+1}. {thisToDo.text}</LiText>
+    <StyledLI key={thisToDo.id} first={index+1 === 1} onClick={() => selectToDo(thisToDo)}>
+      <LiText>{index+1}. {thisToDo.text}</LiText>
       <RemoveLiButton onClick={() => removeToDo(thisToDo)}>X</RemoveLiButton>
     </StyledLI>
   ))

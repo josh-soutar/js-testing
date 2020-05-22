@@ -27,6 +27,10 @@ export default function AddToDo({ onClick }) {
   border: 1px solid black;
   border-width: 1 1 1 0;
   ${sharedStyle}
+  &:hover {
+    cursor: ${props => props.disabled ? "default" : "pointer"};
+    background-color: ${props => props.disabled ? "inherit" : "green"};
+  }
   `
 
 
