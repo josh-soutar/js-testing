@@ -1,52 +1,59 @@
 import React from "react"
 
-import styled from "@xstyled/styled-components"
+import styled, { css } from "@xstyled/styled-components"
 
-export default function ToDoList({ todos, removeToDo, selectToDo }) {
 
-  
+const FadeOnHover = css`
+&:hover {
+  cursor: pointer;
+  background-color: backgroundHover;
+}
+`
+const StyledUL = styled.ul`
+  list-style: none;        
+`
 
-  const StyledUL = styled.ul`
-    list-style: none;        
-  `
-
-  const StyledLI = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid black;
-  border-width: 0px 1px 1px 1px;
-  padding: 20px 15px;
-  &:hover {
-    cursor: pointer;
-    background-color: backgroundHover;
-  }
-  z-index: 10;
-  
+const StyledLI = styled.li`
+display: flex;
+align-items: center;
+justify-content: space-between;
+border: 1px solid black;
+border-width: 0px 1px 1px 1px;
+height: 50px;    
 `
 
 const LiText = styled.div`
+flex-grow: 1;
+height: 100%;
+display: flex;
+align-items: center;
+padding-left: 1;
+border-right: 1px solid black;
+${FadeOnHover}
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 `
 
 const RemoveLiButton = styled.button`
-padding: 1;
 font-weight: 900;
-z-index: 20;
-&:hover {
-  background-color: backgroundHover;
-  cursor: pointer;
-} 
+min-width: 50px;
+height: 100%;
+border: 0;
+${FadeOnHover}
 `
 
-  let toDoItem = todos.map((thisToDo, index) => (    
-    <StyledLI key={thisToDo.id} first={index+1 === 1} onClick={() => selectToDo(thisToDo)}>
-      <LiText>{index+1}. {thisToDo.text}</LiText>
-      <RemoveLiButton onClick={() => removeToDo(thisToDo)}>X</RemoveLiButton>
-    </StyledLI>
-  ))
+export default function ToDoList({ todos, removeToDo, selectToDo }) {
 
-  return (
-  <StyledUL>{toDoItem}</StyledUL>
-  )
+let toDoItem = todos.map((thisToDo, index) => (    
+  <StyledLI key={thisToDo.id} first={index+1 === 1}>
+    <LiText onClick={() => selectToDo(thisToDo)}>{index+1}. {thisToDo.text}</LiText>
+    <RemoveLiButton onClick={() => removeToDo(thisToDo)}>X</RemoveLiButton>
+  </StyledLI>
+))
+
+return (
+<StyledUL>{toDoItem}</StyledUL>
+)
 
 }

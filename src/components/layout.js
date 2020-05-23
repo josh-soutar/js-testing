@@ -15,7 +15,10 @@ const GlobalPageLayout = styled.div`
 `
 
 const BodyWrapper = styled.div`
-  padding-bottom: 2.5rem; /* Footer height */
+min-height: calc(100% - 90px);
+position: absolute;
+width: 100%;
+display: flex;
 `
 
 const Layout = ({ children }) => {
@@ -24,9 +27,8 @@ const Layout = ({ children }) => {
       <GlobalPageLayout className="GlobalPageLayout">
         <Header />
 
-        <BodyWrapper>{children}</BodyWrapper>
-
-        <Footer />
+        <BodyWrapper className="BodyWrapper">{children}</BodyWrapper>
+        
       </GlobalPageLayout>
     </ThemeProvider>
   )
