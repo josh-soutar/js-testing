@@ -1,64 +1,130 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
-import styled from "@xstyled/styled-components"
+import styled, { Box } from "@xstyled/styled-components"
+import SlideUpWord from "../../molecules/SlideUpWord"
 
-const Root = styled.div`
-background-color: yellow;
-width: 100vw;
-height: calc(2 * 100vh);
-position: relative;
+const PageOne = styled.div`
+  height: calc(100vh - 90px);
+  width: 100vw;
+  background-color: lightblue;
+  position: relative;
+`
+
+const PageOneTextPosition = styled.div`
+  position: absolute;
+  bottom: 0;
+  padding: 10;
+`
+
+
+
+const PageTwo = styled.div`
+  width: 100vw;
+  background-color: lightyellow;
+  height: 200vh;
+  position: relative;
 `
 
 const IntersectionItem = styled.div`
-position: absolute;
-height: 50vh;
-width: 100vw;
-bottom: 0%;
-background-color: green;
-border: 2px solid yellow;
+  height: 500px;
+  width: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10%;
+  background-color: lightgreen;
+  border: 2px solid black;
+  transition: opacity 0.1s ease;
+  position: absolute;
 `
-//https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 
+const IntersectionStatsTop = styled.div`
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
+const IntersectionStatsBottom = styled.div`
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
+
+//Intersection observer should be it's own component
 
 export default function IntersectionAnimations() {
-    let options = '';
-    let observer = '';
-    let target = '';
+  let [intersectionRatio, setIntersectionRatio] = useState(0)
 
-    function createObserver() {
-        options = {
-            root: null,//document.querySelector("#intersectionRoot"),
-            rootMargin: "0px",
-            threshold: 1.0 //triggering immediately for some strange reason????
-        }
-        
-        observer = new IntersectionObserver(callback, options);
-        target = document.querySelector("#triggerPls");
-        observer.observe(target);
+  let options,
+    observer,
+    target,
+    prevRatio = ""
+
+  function createObserver() {
+    options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: generateThresholds(),
     }
+    observer = new IntersectionObserver(callback, options)
+    target = document.querySelector("#triggerPls") //update this to use a ref.
+    observer.observe(target)
+  }
 
-    function callback(entries, observer) {
-       
-        entries.forEach(entry => {        
-            console.log('entry details',entry);
-            entry.target.style.backgroundColor = 'blue';
-        })
+  function generateThresholds() {
+    let points = []
+    for (let i = 0; i < 1; i += 0.1) {
+      points.push(parseFloat(i.toFixed(2)))
     }
+    return points
+  }
 
-    useEffect(() => {
-        createObserver()
+  function callback(entries, observer) {
+    entries.forEach(entry => {
+      setIntersectionRatio(entry.intersectionRatio.toFixed(2))
+      entry.target.style.opacity = intersectionRatio
+      if (intersectionRatio < prevRatio) {
+        //Scrolling up?
+      }      
+      prevRatio = intersectionRatio
     })
+  }
 
-    
+  useEffect(() => {
+    createObserver()
+  })
 
-    return (
-        <>
-        <Root id='intersectionRoot'>
+  //Create a component for each section (E.g. PageOne)
 
-            <IntersectionItem id="triggerPls"></IntersectionItem>
+  return (
+    <>
+      <PageOne>
+        <PageOneTextPosition>
 
-        </Root>
-        </>
-    )
+          <Box row>
+            <SlideUpWord delay="1000ms">Uniquely</SlideUpWord><SlideUpWord delay="1100ms">Peaceful,</SlideUpWord>
+          </Box>
 
+          <Box row my={1}>
+            <SlideUpWord delay="1400ms">Beautifully</SlideUpWord><SlideUpWord delay="1500ms">Restful.</SlideUpWord>
+          </Box>
+          
+          <Box row>
+            <SlideUpWord delay="2000ms" fontSize="4">A discovery land company community</SlideUpWord>
+          </Box>
+
+        </PageOneTextPosition>
+      </PageOne>
+
+      <PageTwo>
+        <IntersectionItem id="triggerPls"> {/* useRef attribute*/}
+          <IntersectionStatsTop>intersection ratio: {intersectionRatio}</IntersectionStatsTop>
+
+          <IntersectionStatsBottom>
+            intersection ratio: {intersectionRatio}
+          </IntersectionStatsBottom>
+        </IntersectionItem>
+      </PageTwo>
+    </>
+  )
 }

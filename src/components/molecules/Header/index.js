@@ -45,9 +45,9 @@ const Header = () => {
       <StyledUL>
         <ListLink to="/">Home</ListLink>
         <ListLink to="/about/">About</ListLink>
+        <ListLink to="/intersection_effects">Intersetion</ListLink>
         <ListLink to="/scroller/">Scroller</ListLink>
-        <ListLink to="/todo/">To Do</ListLink>
-        <ListLink to="/todo/">Theme picker</ListLink>
+        <ListLink to="/todo/">To Do</ListLink>      
       </StyledUL>
     </StyledHeader>
   )
