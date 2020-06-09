@@ -38,6 +38,7 @@ export default () => {
         <HomepageBlock to="/intersection_effects">Intersetion</HomepageBlock>
         <HomepageBlock to="/scroller/">Scroller</HomepageBlock>
         <HomepageBlock to="/todo/">To Do</HomepageBlock>
+        <HomepageBlock to="/testing/">Test page</HomepageBlock>
       </StyledUL>
 
 

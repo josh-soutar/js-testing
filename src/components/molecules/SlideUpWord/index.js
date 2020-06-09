@@ -17,7 +17,7 @@ const EmptyBox = styled.div`
 
 const WordBox = styled.box`
   color: white;
-  font-size: 12;
+  font-size: 13;
   transition: transform 0.4s ease;
   transition-delay: ${props => props.delay || '0ms'};  
 `
@@ -25,15 +25,15 @@ const WordBox = styled.box`
 export default function SlideUpWord({ children, delay, fontSize }) {
 
     let [translateStyle, setTranslateStyle] = useState({ transform: "translateY(100%)", })
-
+const [state, setState] = useState(false)
     useEffect(() => {
-        setTranslateStyle(translateStyle = { transform: "translateY(0%)", })
-    })
+      setTranslateStyle(translateStyle = { transform: "translateY(0%)", })
+    }, [])
 
   return (
     <WordContainer>
       <EmptyBox></EmptyBox>
-      <WordBox p={1} fontSize={fontSize} delay={delay} style={translateStyle}>{children}</WordBox>
+      <WordBox pr={1} fontSize={fontSize} delay={delay} style={translateStyle}>{children}</WordBox>
     </WordContainer>
   )
 }

@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "tenor";
+  src: local("tenor"), url("../fonts/TenorSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
